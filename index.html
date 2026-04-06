@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURUBIKA // Creative Technologist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #00f2ff;
+            --bg: #050505;
+        }
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Space+Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+        canvas#bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .syncopate { font-family: 'Syncopate', sans-serif; }
+        
+        /* Custom Cursor */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+            z-index: 9999;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.1);
+        }
+
+        /* Glitch Effect */
+        .glitch:hover {
+            animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <canvas id="bg"></canvas>
+
+    <nav class="fixed w-full z-50 p-6 flex justify-between items-center mix-blend-difference">
+        <div class="text-2xl font-bold syncopate tracking-tighter uppercase">Surubika</div>
+        <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest">
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#skills" class="nav-link">Stacks</a>
+            <a href="#contact" class="nav-link">Connect</a>
+        </div>
+        <div class="h-1 w-12 bg-white rounded-full"></div>
+    </nav>
+
+    <main class="relative z-10 container mx-auto px-6">
+        
+        <section class="h-screen flex flex-col justify-center">
+            <div class="max-w-5xl">
+                <p class="text-cyan-400 font-mono mb-4 tracking-[0.5em] uppercase text-sm">System.Initialize(Surubika)</p>
+                <h1 class="text-6xl md:text-9xl font-bold syncopate uppercase leading-none mb-8">
+                    Architecting <br> <span class="text-transparent" style="-webkit-text-stroke: 1px white;">The Future</span>
+                </h1>
+                <div class="flex items-center gap-6">
+                    <div class="h-[1px] w-24 bg-white"></div>
+                    <p class="text-slate-400 max-w-md text-lg">
+                        Full-stack developer specializing in high-performance web systems and interactive 3D experiences.
+                    </p>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-6 animate-bounce">
+                <i data-lucide="arrow-down" class="text-cyan-400"></i>
+            </div>
+        </section>
+
+        <section id="work" class="py-20">
+            <div class="flex justify-between items-end mb-16">
+                <h2 class="text-4xl font-bold syncopate uppercase">Featured<br>Deployments</h2>
+                <span class="text-slate-500 font-mono text-sm">/ 01</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="glass-card p-2 rounded-3xl group cursor-none">
+                    <div class="aspect-video bg-slate-900 rounded-2xl mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1000" alt="project" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Neural Engine V2</h3>
+                                <p class="text-slate-400 text-sm">Real-time AI data visualization platform.</p>
+                            </div>
+                            <i data-lucide="external-link" class="text-cyan-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-2 rounded-3xl group cursor-none">
+                    <div class="aspect-video bg-slate-900 rounded-2xl mb-6 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?auto=format&fit=crop&q=80&w=1000" alt="project" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Omni-Vault</h3>
+                                <p class="text-slate-400 text-sm">Secure decentralized asset management protocol.</p>
+                            </div>
+                            <i data-lucide="external-link" class="text-cyan-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20">
+            <div class="glass-card p-12 rounded-[3rem] border-dashed">
+                <h3 class="text-center text-xl font-bold mb-12 uppercase tracking-widest text-cyan-400">Tech Stack Mastery</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="glitch">
+                        <div class="text-4xl font-bold mb-2">TS</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-tighter">TypeScript</div>
+                    </div>
+                    <div class="glitch">
+                        <div class="text-4xl font-bold mb-2">RX</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-tighter">React / Next.js</div>
+                    </div>
+                    <div class="glitch">
+                        <div class="text-4xl font-bold mb-2">GL</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-tighter">WebGL / ThreeJS</div>
+                    </div>
+                    <div class="glitch">
+                        <div class="text-4xl font-bold mb-2">DB</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-tighter">PostgreSQL</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-32 flex flex-col items-center text-center">
+            <h2 class="text-6xl md:text-8xl font-bold syncopate mb-12 opacity-20">CONTACT</h2>
+            <a href="mailto:hello@surubika.dev" class="text-3xl md:text-5xl font-light hover:text-cyan-400 transition-colors border-b-2 border-slate-800 pb-4">
+                hello@surubika.dev
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="p-10 text-center text-slate-600 text-xs tracking-widest uppercase">
+        Built with Precision by Surubika &copy; 2026
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Custom Cursor Movement
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // --- THREE.JS BACKGROUND ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#bg'), antialias: true, alpha: true });
+        
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        // Particle System
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 5000; i++) {
+            vertices.push(THREE.MathUtils.randFloatSpread(100)); // x
+            vertices.push(THREE.MathUtils.randFloatSpread(100)); // y
+            vertices.push(THREE.MathUtils.randFloatSpread(100)); // z
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0x00f2ff, size: 0.1 }));
+        scene.add(particles);
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.0005;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Responsive Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Scroll Interaction
+        document.body.onscroll = () => {
+            const t = document.body.getBoundingClientRect().top;
+            camera.position.z = 30 + t * 0.02;
+            particles.rotation.y += 0.01;
+        };
+    </script>
+</body>
+</html>
